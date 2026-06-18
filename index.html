@@ -1,302 +1,714 @@
 <!DOCTYPE html>
 <html lang="he" dir="rtl">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>המסע להחלמה – ניתוח אפנדיציט מתקדם</title>
-  <meta name="description" content="דף מידע בעברית: מהתסמינים הראשונים ועד חודש להחלמה לאחר ניתוח אפנדיציט לפרוסקופי – נקי, ברור ונגיש." />
-  <meta name="theme-color" content="#000000" />
-  <!-- Open Graph / Twitter -->
-  <meta property="og:type" content="website" />
-  <meta property="og:locale" content="he_IL" />
-  <meta property="og:title" content="30 ימים של החלמה – ניתוח אפנדיציט" />
-  <meta property="og:description" content="מה הכאב, איך נראה הניתוח, ציר זמן החלמה של 30 יום וטיפים שימושיים." />
-  <!-- Tip: לאחר פרסום ל-GitHub Pages עדכן/י את canonical ואת og:image לכתובת הסופית -->
-  <!-- <link rel="canonical" href="https://<username>.github.io/<path>/" /> -->
-  <!-- <meta property=\"og:image\" content=\"https://<username>.github.io/<path>/og.png\" /> -->
-  <meta name="twitter:card" content="summary_large_image" />
+  <title>ניתוח להסרת אפנדיציט בלפרוסקופיה — 30 ימים של החלמה</title>
+  <meta name="description" content="Scrollytelling פרימיום בסגנון אפל על אפנדקטומיה בלפרוסקופיה: טכנולוגיה, שלבי הניתוח, וסמן החלמה אישי ל‑30 ימים." />
 
-  <!-- Fonts performance -->
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@300;400;600;700&display=swap" rel="stylesheet" />
+  <!-- Google Font: Heebo (headers bold, text regular/light) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;700;800;900&display=swap" rel="stylesheet">
 
   <style>
-    :root {
-      --bg: #000000;
-      --fg: #f5f5f7;
-      --muted: #86868b;
-      --card: #111112;
-      --card-2: #1c1c1e;
-      --border: #222223;
-      --accent: #0071e3;
-      --accent-2: #2997ff;
-      --light: #f5f5f7;
-      --dark: #1d1d1f;
+    :root{
+      --bg-dark:#000000;
+      --bg-light:#F5F5F7;
+      --text:#0B0B0C;
+      --text-inv:#FFFFFF;
+      --blue:#0071E3;
+      --red:#FF453A;   /* לשימוש בלעדי לאזהרות רפואיות */
+      --ink:#1C1C1E;
+      --muted:#6B7280;
+      --glass: rgba(255,255,255,0.08);
+      --card: rgba(255,255,255,0.06);
+      --radius: 16px;
+      --radius-lg: 24px;
+      --gold:#D4AF37; /* להמלצת זהב (לא אזהרה) */
+      --shadow-1: 0 8px 24px rgba(0,0,0,0.18);
+      --shadow-2: 0 16px 48px rgba(0,0,0,0.22);
+      --ease: cubic-bezier(.22,.61,.36,1);
     }
 
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; }
-    body {
-      font-family: 'Assistant', -apple-system, BlinkMacSystemFont, sans-serif;
-      background-color: var(--bg);
-      color: var(--fg);
-      overflow-x: hidden;
-      -webkit-font-smoothing: antialiased;
-      line-height: 1.4;
+    *{ box-sizing: border-box; }
+    html,body{
+      margin:0; padding:0;
+      font-family:"Heebo", system-ui, -apple-system, "Segoe UI", Arial, sans-serif;
+      background:var(--bg-light);
+      color:var(--text);
+      scroll-behavior:smooth;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
     }
 
-    /* Reduced motion */
-    @media (prefers-reduced-motion: reduce) {
-      html { scroll-behavior: auto; }
-      .scroll-indicator { animation: none !important; }
+    /* NAV */
+    .nav{
+      position:fixed; top:0; inset-inline:0; z-index:9999;
+      backdrop-filter: blur(20px);
+      background: color-mix(in srgb, var(--bg-dark) 60%, transparent);
+      border-bottom:1px solid rgba(255,255,255,0.08);
+    }
+    .nav-inner{
+      max-width:1100px; margin:0 auto; padding:12px 20px;
+      display:flex; align-items:center; gap:16px;
+    }
+    .brand{
+      color:#fff; font-weight:800; letter-spacing:0.3px; font-size:18px;
+      opacity:0.96;
+    }
+    .links{
+      display:flex; gap:18px; margin-inline-start:auto;
+    }
+    .links a{
+      color:#fff; text-decoration:none; font-weight:500; opacity:0.86;
+      transition:opacity .25s var(--ease);
+    }
+    .links a:hover{ opacity:1; }
+    .sos-btn{
+      margin-inline-start: auto; /* בל RTL זה דוחף שמאלה */
+      background: var(--red);
+      color:#fff; border:none; padding:10px 16px; border-radius:12px;
+      font-weight:800; letter-spacing:.3px; cursor:pointer;
+      transition: transform .2s var(--ease), box-shadow .2s var(--ease);
+      box-shadow: 0 6px 18px rgba(255, 69, 58, .35);
+    }
+    .sos-btn:hover{ transform: translateY(-2px); box-shadow: 0 10px 24px rgba(255, 69, 58, .5); }
+
+    /* LAYOUT */
+    .section{
+      padding:120px 20px;
+    }
+    .container{
+      max-width:1100px; margin:0 auto;
+    }
+    .dark{ background:var(--bg-dark); color:var(--text-inv); }
+    .light{ background:var(--bg-light); color:var(--ink); }
+    .over-subtle{ color:#D1D1D6; }
+    h1,h2{ margin:0 0 14px 0; line-height:1.12; }
+    h1{ font-size: clamp(36px, 7vw, 72px); font-weight:900; letter-spacing:-0.5px;}
+    h2{ font-size: clamp(26px, 4vw, 42px); font-weight:800; letter-spacing:-0.3px;}
+    p{ font-size: clamp(16px, 2.3vw, 18px); line-height:1.7; margin:0 0 10px 0; color: color-mix(in srgb, currentColor 86%, transparent); }
+
+    /* HERO */
+    #hero .hero-wrap{
+      display:grid; grid-template-columns: 1.1fr .9fr; gap:32px; align-items:center;
+    }
+    #hero .intro{
+      display:flex; flex-direction:column; gap:14px;
+    }
+    .kicker{ color:var(--blue); font-weight:700; letter-spacing:.6px; font-size:13px; }
+    .hero-input{
+      display:flex; gap:10px; margin-top:10px; flex-wrap:wrap;
+      background:rgba(255,255,255,0.06); padding:12px; border-radius:14px; border:1px solid rgba(255,255,255,0.12);
+    }
+    .hero-input label{ font-size:14px; opacity:.9;}
+    .hero-input input[type="date"]{
+      appearance:none; -webkit-appearance:none;
+      background:rgba(255,255,255,0.12);
+      border:1px solid rgba(255,255,255,0.18);
+      color:#fff; padding:10px 12px; border-radius:10px;
+      font-weight:600;
+    }
+    .hero-input button{
+      background:var(--blue); color:#fff; border:none; padding:10px 14px; border-radius:10px;
+      font-weight:800; letter-spacing:.3px; cursor:pointer;
+      transition: transform .2s var(--ease), box-shadow .2s var(--ease);
+      box-shadow: 0 6px 16px rgba(0, 113, 227, .35);
+    }
+    .hero-input button:hover{ transform: translateY(-2px); box-shadow: 0 10px 24px rgba(0, 113, 227, .5); }
+
+    /* Glowing core illustration */
+    .core{
+      width:min(420px, 70vw); aspect-ratio:1/1; margin-inline:auto;
+      border-radius:50%;
+      background:
+        radial-gradient(closest-side, rgba(0,113,227,0.65) 0%, rgba(0,113,227,0.08) 55%, transparent 70%),
+        radial-gradient(circle at 70% 30%, rgba(255,255,255,0.12), transparent 50%),
+        radial-gradient(circle at 35% 65%, rgba(255,255,255,0.08), transparent 60%);
+      box-shadow:
+        0 0 140px rgba(0,113,227,0.35),
+        inset 0 0 60px rgba(0,113,227,0.45),
+        0 0 0 1px rgba(255,255,255,0.06);
+      position:relative;
+      overflow:hidden;
+    }
+    .core::before, .core::after{
+      content:""; position:absolute; inset:0; border-radius:50%;
+    }
+    .core::before{
+      box-shadow: 0 0 140px 60px rgba(0,113,227,0.35);
+      animation: pulse 5s var(--ease) infinite;
+    }
+    .core::after{
+      background:
+        conic-gradient(from 0deg, rgba(255,255,255,0.12), transparent 60%, rgba(255,255,255,0.12));
+      mix-blend-mode: overlay; opacity:.22;
+      animation: rotate 24s linear infinite;
+    }
+    @keyframes pulse{ 0%,100%{opacity:.8; filter: blur(10px)} 50%{opacity:1; filter: blur(16px)} }
+    @keyframes rotate{ to{ transform: rotate(1turn); } }
+
+    /* SYMPTOMS wave line */
+    .wave-wrap{
+      margin-top:26px; height:80px; position:relative; overflow:hidden; border-radius:12px;
+      background: linear-gradient(180deg, rgba(0,0,0,0.04), rgba(0,0,0,0.02));
+      border:1px solid rgba(0,0,0,0.06);
+    }
+    .wave{
+      position:absolute; inset:0;
+    }
+    .wave svg{ width:140%; height:100%; transform: translateX(-20%); }
+    .wave path{
+      stroke: var(--blue); stroke-width:2.5; fill:none;
+      filter: drop-shadow(0 2px 6px rgba(0,113,227,.35));
+      stroke-dasharray: 8 6;
+      animation: dash 3.5s linear infinite;
+    }
+    @keyframes dash{ to{ stroke-dashoffset: -140; } }
+
+    /* TECHNOLOGY bento */
+    #tech .bento{
+      display:grid; grid-template-columns:repeat(12,1fr); gap:18px; margin-top:18px;
+    }
+    .tile{
+      background: var(--card);
+      border:1px solid rgba(255,255,255,0.08);
+      border-radius: var(--radius-lg);
+      padding:20px; min-height:180px;
+      box-shadow: var(--shadow-1);
+      transition: transform .25s var(--ease), box-shadow .25s var(--ease), background .25s var(--ease);
+    }
+    .tile:hover{ transform: translateY(-6px); box-shadow: var(--shadow-2); }
+    .tile h3{ margin:0 0 8px 0; font-size:20px; font-weight:800; }
+    .tile p{ color: #DADBE1; }
+    .tile.small{ grid-column: span 4; }
+    .tile.large{ grid-column: span 8; }
+
+    /* Camera overlay */
+    .camera{
+      position:relative; border-radius:14px; overflow:hidden; margin-top:10px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(0,0,0,0.3));
+      height:180px; display:grid; place-items:center;
+    }
+    .camera::before, .camera::after{
+      content:""; position:absolute; inset:12px; border-radius:10px;
+      border:1px solid rgba(255,255,255,0.22);
+    }
+    .reticle{
+      width:140px; height:140px; border-radius:50%;
+      border:1.6px solid rgba(255,255,255,0.6); position:relative;
+      box-shadow: 0 0 24px rgba(0,113,227,0.35), inset 0 0 24px rgba(0,113,227,0.25);
+      animation: slowpulse 4.5s ease-in-out infinite;
+    }
+    .reticle::before, .reticle::after{
+      content:""; position:absolute; inset:0;
+    }
+    .reticle::before{ border-radius:50%; border:1px dashed rgba(255,255,255,0.5); transform: scale(1.22); opacity:.6; }
+    .reticle::after{
+      inset:50% 0 0 0; border-top:1px solid rgba(255,255,255,0.4);
+      transform: rotate(90deg);
+    }
+    .cross{
+      position:absolute; inset:0; display:flex; align-items:center; justify-content:center;
+    }
+    .cross::before, .cross::after{
+      content:""; position:absolute; background:rgba(255,255,255,0.45);
+    }
+    .cross::before{ width:1px; height:70%; }
+    .cross::after{ height:1px; width:70%; }
+    .badge-4k{
+      position:absolute; top:10px; inset-inline-end:12px;
+      background: rgba(0,113,227,0.9); color:#fff; font-weight:800; font-size:12px;
+      padding:6px 10px; border-radius:999px; letter-spacing:.4px;
+      box-shadow: 0 4px 14px rgba(0,113,227,.45);
+    }
+    @keyframes slowpulse{ 0%,100%{ transform: scale(1); } 50%{ transform: scale(1.06); } }
+
+    /* PROCEDURE timeline */
+    #procedure .proc{
+      display:grid; grid-template-columns: 80px 1fr; gap:24px; align-items:start; margin-top:16px;
+    }
+    .rail{
+      position:relative; height:100%;
+      display:flex; justify-content:center;
+    }
+    .track{
+      position:sticky; top:120px;
+      width:6px; height:70vh; background: rgba(255,255,255,0.14);
+      border-radius:12px; overflow:hidden;
+    }
+    .fill{
+      position:absolute; bottom:0; left:0; right:0; height:0%;
+      background: linear-gradient(180deg, var(--blue), color-mix(in srgb, var(--blue) 40%, #0b0b0c));
+      box-shadow: 0 8px 22px rgba(0,113,227,.45);
+    }
+    .steps{ display:flex; flex-direction:column; gap:18px; }
+    .step{
+      background: rgba(255,255,255,0.07); border:1px solid rgba(255,255,255,0.12);
+      padding:18px; border-radius:14px; transition: transform .25s var(--ease), background .25s var(--ease);
+    }
+    .step.active{ background: rgba(0,113,227,0.18); transform: translateX(-4px); }
+    .step h4{ margin:0 0 6px 0; font-size:18px; font-weight:800; }
+    .note{ font-size:14px; color:#D1D1D6; }
+
+    /* TRACKER */
+    .tracker{
+      display:grid; grid-template-columns: repeat(12,1fr); gap:18px; margin-top:8px;
+    }
+    .phase{
+      grid-column: span 6;
+      background:#fff; border:1px solid #E5E7EB; border-radius:16px; padding:18px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.06);
+      transition: border-color .25s var(--ease), transform .25s var(--ease), box-shadow .25s var(--ease);
+    }
+    .phase:hover{ transform: translateY(-4px); box-shadow: 0 16px 40px rgba(0,0,0,0.10); }
+    .phase h3{ margin:0 0 8px 0; font-size:20px; font-weight:800; color:#0B0B0C; }
+    .phase p{ color:#3C3C43; }
+    .gold{
+      margin-top:12px; padding:12px; border-radius:12px;
+      background: linear-gradient(135deg, rgba(212,175,55,0.14), rgba(212,175,55,0.06));
+      border:1px solid rgba(212,175,55,0.35); color:#2a2415; font-weight:600;
+    }
+    .phase.active{
+      border-color: var(--blue); box-shadow: 0 12px 36px rgba(0,113,227,.20);
+    }
+    .today-chip{
+      display:inline-flex; align-items:center; gap:8px;
+      background:#fff; border:1px solid #E5E7EB; padding:8px 12px; border-radius:999px;
+      font-size:14px; margin-top:8px;
+    }
+    .chip-dot{
+      width:8px; height:8px; border-radius:50%; background:var(--blue); box-shadow:0 0 0 3px rgba(0,113,227,.18);
     }
 
-    /* Skip link */
-    .skip-link {
-      position: absolute;
-      top: -40px;
-      right: 16px;
-      background: var(--accent);
-      color: #fff;
-      padding: 8px 12px;
-      border-radius: 8px;
-      text-decoration: none;
-      transition: top .2s;
-      z-index: 10000;
-      font-weight: 700;
+    /* FAQ accordion */
+    .faq{
+      display:flex; flex-direction:column; gap:10px; margin-top:12px;
     }
-    .skip-link:focus { top: 8px; }
-
-    /* Top nav */
-    .nav-bar {
-      position: fixed; top: 0; width: 100%; height: 44px;
-      background: rgba(22, 22, 23, 0.8);
-      backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
-      z-index: 9999; border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 0 22px; font-size: 12px; letter-spacing: -0.01em; color: var(--fg);
+    .qa{
+      background:#fff; border:1px solid #E5E7EB; border-radius:14px; overflow:hidden;
+      transition: box-shadow .2s var(--ease), transform .2s var(--ease);
     }
-    .nav-logo { font-weight: 700; font-size: 14px; }
+    .qa:hover{ transform: translateY(-2px); box-shadow: 0 12px 30px rgba(0,0,0,.08); }
+    .q{
+      cursor:pointer; padding:16px 18px; display:flex; align-items:center; justify-content:space-between;
+    }
+    .q h4{ margin:0; font-size:18px; font-weight:800; color:#0B0B0C;}
+    .arrow{ transition: transform .25s var(--ease); }
+    .qa.open .arrow{ transform: rotate(180deg); }
+    .a{
+      max-height:0; overflow:hidden; transition:max-height .35s var(--ease), opacity .35s var(--ease);
+      padding: 0 18px; opacity:0;
+      border-top:1px solid #EFEFF1; background: #FAFAFB;
+    }
+    .qa.open .a{ max-height:280px; opacity:1; padding:12px 18px 18px; }
 
-    main section {
-      min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center;
-      padding: 80px 24px; position: relative; text-align: center;
+    /* SOS */
+    #sos .sos-card{
+      background:#fff; border:2px solid color-mix(in srgb, var(--red) 60%, #fff);
+      border-radius:18px; padding:18px; box-shadow: 0 12px 36px rgba(255,69,58,.12);
+    }
+    .sos-list{ display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-top:10px; }
+    .sos-item{
+      display:flex; align-items:flex-start; gap:10px; background:#FFF5F5; border:1px solid color-mix(in srgb, var(--red) 45%, #fff);
+      padding:12px; border-radius:12px;
+    }
+    .sos-dot{ width:10px; height:10px; border-radius:50%; background:var(--red); box-shadow: 0 0 0 4px rgba(255,69,58,.2); margin-top:6px; }
+    .sos-cta{
+      margin-top:14px; display:flex; gap:10px; flex-wrap:wrap;
+    }
+    .sos-cta .btn{
+      background: var(--red); color:#fff; border:none; padding:10px 14px; border-radius:12px; font-weight:800; letter-spacing:.3px;
+      box-shadow: 0 8px 22px rgba(255,69,58,.3);
+    }
+    .sos-meter{
+      height:10px; border-radius:999px; background:#FFE5E3; overflow:hidden; margin-top:10px;
+      position:relative;
+    }
+    .sos-meter::after{
+      content:""; position:absolute; inset:0; width:68%; background: linear-gradient(90deg, #FFAEA8, var(--red));
+      filter: saturate(120%);
     }
 
-    /* Hero */
-    .hero-section { background: radial-gradient(circle at 50% 80%, #1d1d1f 0%, #000000 70%); padding-top: 120px; }
-    .hero-title {
-      font-size: 56px; font-weight: 700; letter-spacing: -0.015em;
-      background: linear-gradient(180deg, #ffffff 0%, #a1a1a6 100%);
-      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-      margin-bottom: 16px; line-height: 1.1;
+    /* FOOTER */
+    footer{
+      background:#0B0B0C; color:#D1D1D6; padding:40px 20px; text-align:center;
+      border-top:1px solid rgba(255,255,255,0.08);
     }
-    @media (min-width: 768px) { .hero-title { font-size: 80px; } }
-    .hero-subtitle { font-size: 21px; font-weight: 400; color: var(--muted); max-width: 600px; margin-bottom: 40px; line-height: 1.4; }
-    .appendix-glow {
-      width: 180px; height: 180px; background: radial-gradient(circle, rgba(0, 113, 227, 0.25) 0%, rgba(0,0,0,0) 70%);
-      border-radius: 50%; position: relative; margin-top: 20px; border: 1px solid rgba(0, 113, 227, 0.15);
-      display: flex; align-items: center; justify-content: center; box-shadow: 0 0 40px rgba(0, 113, 227, 0.1);
+    footer small{ color:#9CA3AF; }
+
+    /* UTIL */
+    .muted{ color:#9CA3AF; }
+    .divider{ height:1px; background: rgba(0,0,0,0.08); margin:16px 0; }
+    .divider-dark{ height:1px; background: rgba(255,255,255,0.12); margin:16px 0; }
+
+    /* Responsive */
+    @media (max-width: 900px){
+      #hero .hero-wrap{ grid-template-columns:1fr; }
+      #tech .bento{ grid-template-columns:1fr; }
+      .tile.small, .tile.large{ grid-column: span 12; }
+      .tracker{ grid-template-columns:1fr; }
+      .phase{ grid-column: span 12; }
+      .sos-list{ grid-template-columns:1fr; }
     }
-    .appendix-glow::after {
-      content: ''; width: 12px; height: 12px; background-color: var(--accent); border-radius: 50%;
-      box-shadow: 0 0 20px var(--accent), 0 0 40px var(--accent);
+
+    /* Motion a11y */
+    @media (prefers-reduced-motion: reduce){
+      *{ animation: none !important; transition: none !important; }
     }
-    .scroll-indicator { position: absolute; bottom: 40px; font-size: 14px; color: var(--muted); animation: pulse 2s infinite; }
-    @keyframes pulse { 0% { transform: translateY(0); opacity: 0.6; } 50% { transform: translateY(6px); opacity: 1; } 100% { transform: translateY(0); opacity: 0.6; } }
-
-    /* Containers */
-    .container { width: 100%; max-width: 980px; margin: 0 auto; }
-    .section-tag { font-size: 14px; font-weight: 600; color: var(--accent); text-transform: uppercase; letter-spacing: 0.02em; margin-bottom: 12px; }
-    .section-title { font-size: 40px; font-weight: 700; letter-spacing: -0.01em; margin-bottom: 24px; }
-
-    /* Light section */
-    .symptoms-section { background-color: var(--light); color: var(--dark); }
-    .symptoms-grid { display: grid; grid-template-columns: 1fr; gap: 24px; margin-top: 40px; text-align: right; }
-    @media (min-width: 768px) { .symptoms-grid { grid-template-columns: 1fr 1fr; } }
-    .apple-card { background: #ffffff; border-radius: 18px; padding: 32px; transition: transform .2s ease; box-shadow: 0 1px 0 rgba(0,0,0,0.02); }
-    .apple-card:hover { transform: translateY(-2px); }
-    .apple-card h3 { font-size: 22px; font-weight: 600; margin-bottom: 12px; }
-    .apple-card p { font-size: 16px; line-height: 1.6; color: #515154; }
-
-    /* Dark tech */
-    .dark-bg .section-title { color: #ffffff; }
-    .tech-section { background-color: var(--bg); }
-    .bento-grid { display: grid; grid-template-columns: 1fr; gap: 20px; margin-top: 40px; width: 100%; }
-    @media (min-width: 768px) { .bento-grid { grid-template-columns: 2fr 1fr; } .bento-full { grid-column: span 2; } }
-    .bento-item { background: var(--card); border: 1px solid var(--border); border-radius: 24px; padding: 40px; text-align: right; display: flex; flex-direction: column; justify-content: space-between; }
-    .bento-item h3 { font-size: 24px; font-weight: 600; color: #ffffff; margin-bottom: 12px; }
-    .bento-item p { font-size: 16px; color: var(--muted); line-height: 1.6; }
-    .bento-icon { font-size: 32px; margin-bottom: 20px; color: var(--accent); }
-
-    /* Surgery */
-    .surgery-section { background-color: var(--light); color: var(--dark); }
-    .linear-timeline { position: relative; max-width: 700px; margin: 40px auto 0; padding-right: 30px; text-align: right; }
-    .linear-timeline::before { content: ''; position: absolute; right: 8px; top: 0; bottom: 0; width: 2px; background-color: #d2d2d7; }
-    .timeline-step { position: relative; margin-bottom: 40px; }
-    .timeline-step::before { content: ''; position: absolute; right: -27px; top: 6px; width: 12px; height: 12px; border-radius: 50%; background-color: var(--accent); border: 2px solid var(--light); }
-    .timeline-step h3 { font-size: 20px; font-weight: 600; margin-bottom: 8px; }
-    .timeline-step p { font-size: 16px; color: #515154; line-height: 1.6; }
-
-    /* Recovery */
-    .recovery-section { background-color: var(--bg); }
-    .recovery-track { max-width: 800px; margin: 50px auto 0; text-align: right; }
-    .recovery-box { background: linear-gradient(145deg, var(--card), var(--card-2)); border-radius: 20px; padding: 35px; margin-bottom: 24px; border: 1px solid rgba(255,255,255,0.05); position: relative; }
-    .recovery-box::after { content: ''; position: absolute; top: 0; right: 0; width: 5px; height: 100%; background-color: var(--accent); border-top-right-radius: 20px; border-bottom-right-radius: 20px; }
-    .recovery-time { font-size: 14px; font-weight: 700; color: var(--accent); margin-bottom: 6px; letter-spacing: 0.05em; }
-    .recovery-box h3 { font-size: 22px; font-weight: 600; color: #ffffff; margin-bottom: 12px; }
-    .recovery-box p { font-size: 16px; color: #a1a1a6; line-height: 1.7; }
-    .tip-badge { display: inline-block; background: rgba(0, 113, 227, 0.15); color: var(--accent-2); padding: 4px 12px; border-radius: 12px; font-size: 13px; margin-top: 12px; font-weight: 700; }
-
-    footer { background-color: #161617; padding: 60px 24px; text-align: center; color: #86868b; font-size: 14px; border-top: 1px solid #333336; }
-    footer h2 { color: #f5f5f7; font-size: 24px; font-weight: 600; margin-bottom: 16px; }
-    footer p { max-width: 500px; margin: 0 auto 24px; line-height: 1.6; }
-
-    /* Focus styles */
-    :focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; border-radius: 6px; }
   </style>
 </head>
 <body>
-  <a class="skip-link" href="#main">דלג לתוכן</a>
 
-  <header class="nav-bar" role="navigation" aria-label="סרגל עליון">
-    <span class="nav-logo">Care.</span>
-    <span>ניתוח אפנדיציט לפרוסקופי</span>
-  </header>
-
-  <noscript>
-    <div style="padding:12px; text-align:center; background:#fff3cd; color:#3e3e00;">דף זה פועל ללא JavaScript, אך ייראה מושלם עם תמיכה מלאה בדפדפן.</div>
-  </noscript>
-
-  <main id="main">
-    <!-- Hero -->
-    <section id="hero" class="hero-section" aria-label="פתיחה">
-      <div class="container">
-        <h1 class="hero-title">30 ימים של החלמה.</h1>
-        <p class="hero-subtitle">ניתוח אפנדיציט מתקדם בשיטה הזעיר‑פולשנית. מהרגע הראשון של הכאב, ועד לחזרה המלאה לשגרה שלך.</p>
-        <div class="appendix-glow" aria-hidden="true"></div>
+  <!-- NAV -->
+  <nav class="nav" aria-label="ראשי">
+    <div class="nav-inner">
+      <div class="brand">אפנדקטומיה בלפרוסקופיה</div>
+      <div class="links" role="navigation">
+        <a href="#hero">ראשי</a>
+        <a href="#symptoms">תסמינים</a>
+        <a href="#tech">טכנולוגיה</a>
+        <a href="#procedure">ההליך</a>
+        <a href="#tracker">החלמה</a>
+        <a href="#faq">שאלות</a>
       </div>
-      <div class="scroll-indicator" aria-hidden="true">גללו למטה כדי להתחיל ↓</div>
-    </section>
+      <button class="sos-btn" onclick="document.querySelector('#sos').scrollIntoView({behavior:'smooth'})">מדד אזהרה (SOS)</button>
+    </div>
+  </nav>
 
-    <!-- Symptoms -->
-    <section id="symptoms" class="symptoms-section" aria-labelledby="symptoms-title">
-      <div class="container">
-        <div class="section-tag">השלב הראשון</div>
-        <h2 id="symptoms-title" class="section-title">משהו לא בסדר.</h2>
-        <p style="color:#6e6e73; max-width: 600px; margin: 0 auto 30px; font-size: 18px;">זיהוי מוקדם של התסמינים הופך את כל המשך התהליך לפשוט, בטוח ומהיר בהרבה.</p>
-        <div class="symptoms-grid">
-          <article class="apple-card">
-            <h3>איך הכאב מתנהג?</h3>
-            <p>זה מתחיל לרוב ככאב עמום ומציק באזור הטבור. בתוך מספר שעות, הכאב נודד ומתמקם בבטן הימנית התחתונה, כשהוא הופך לחד וממוקד יותר, במיוחד בזמן תנועה, נשימה עמוקה או שיעול.</p>
-          </article>
-          <article class="apple-card">
-            <h3>תסמינים נלווים</h3>
-            <p>לצד הכאב, הגוף מאותת באמצעות אובדן תיאבון פתאומי, תחושת בחילה קלה או הקאות, ונפיחות קלה בבטן. לעיתים קרובות יתפתח גם חום נמוך (סביב 38 מעלות).</p>
-          </article>
+  <!-- HERO -->
+  <section id="hero" class="section dark" aria-label="פתיח" style="padding-top:160px;">
+    <div class="container hero-wrap">
+      <div class="intro">
+        <span class="kicker">עדין. מדויק. מינימום צלקות.</span>
+        <h1>30 ימים של החלמה.</h1>
+        <p class="over-subtle">ניתוח להסרת אפנדיציט בלפרוסקופיה מביא שילוב של דיוק מיקרוסקופי עם התאוששות מהירה. פחות כאב, פחות אשפוז, וחזרה בטוחה לשגרה.</p>
+        <div class="hero-input" role="group" aria-label="הזנת תאריך ניתוח">
+          <label for="surgeryDate">הזן את תאריך הניתוח שלך לקבלת ציר זמן אישי</label>
+          <input id="surgeryDate" type="date" />
+          <button id="saveDateBtn" type="button" aria-label="שמירת תאריך">שמור</button>
+          <div id="dateSaved" class="muted" style="display:none;">נשמר ✓</div>
         </div>
-        <p style="margin-top:30px; font-size:15px; color:#1d1d1f;" class="highlight-blue">המלצת זהב: אם הכאב חד ומתגבר, אל תמתינו לבוקר. פנו לאבחון רפואי מהיר.</p>
-      </div>
-    </section>
-
-    <!-- Technology -->
-    <section id="tech" class="tech-section dark-bg" aria-labelledby="tech-title">
-      <div class="container">
-        <div class="section-tag">החדשנות הרפואית</div>
-        <h2 id="tech-title" class="section-title">שלוש נקודות. אפס דאגות.</h2>
-        <p style="color: var(--muted); max-width: 600px; margin: 0 auto 40px; font-size: 18px;">שכחו מפתיחת בטן מלאה. השיטה הלפרוסקופית מאפשרת כריתה מדויקת דרך שלושה פתחים זעירים בלבד.</p>
-        <div class="bento-grid">
-          <div class="bento-item bento-full">
-            <div>
-              <div class="bento-icon" aria-hidden="true">🎥</div>
-              <h3>מצלמת HD זעירה (אנדוסקופ)</h3>
-              <p>החדרה דרך הטבור מעניקה לצוות המנתח שדה ראייה חד וברור של חלל הבטן ומפחיתה סיכון לפגיעה ברקמות סמוכות.</p>
-            </div>
-          </div>
-          <div class="bento-item">
-            <div>
-              <div class="bento-icon" aria-hidden="true">⚡</div>
-              <h3>מכשיר עבודה א׳</h3>
-              <p>זרוע עדינה להפרדה ממוקדת של האפנדיציט המודלק מסביבתו.</p>
-            </div>
-          </div>
-          <div class="bento-item">
-            <div>
-              <div class="bento-icon" aria-hidden="true">✂️</div>
-              <h3>מכשיר עבודה ב׳</h3>
-              <p>מכשיר קצה המבצע חיתוך וסגירה בטוחה של בסיס התוספתן.</p>
-            </div>
-          </div>
+        <div id="todayPhaseChip" class="today-chip" style="display:none;">
+          <span class="chip-dot"></span>
+          <span id="todayPhaseText">…</span>
         </div>
       </div>
-    </section>
+      <div class="illus">
+        <div class="core" aria-hidden="true" title="מוקד ריפוי מקומי — הדמיה מופשטת"></div>
+      </div>
+    </div>
+  </section>
 
-    <!-- Surgery Flow -->
-    <section id="surgery" class="surgery-section" aria-labelledby="surgery-title">
-      <div class="container">
-        <div class="section-tag">מהלך הפרוצדורה</div>
-        <h2 id="surgery-title" class="section-title">45 דקות של דיוק ובטיחות.</h2>
-        <div class="linear-timeline" role="list">
-          <div class="timeline-step" role="listitem">
-            <h3>1. הרדמה ורוגע</h3>
-            <p>הניתוח מבוצע תחת הרדמה מלאה. אינכם מרגישים דבר לאורך כל התהליך.</p>
-          </div>
-          <div class="timeline-step" role="listitem">
-            <h3>2. יצירת מרחב עבודה</h3>
-            <p>חלל הבטן מנופח בעדינות בגז CO₂ כדי להרחיק את דופן הבטן ולאפשר תמרון בטוח.</p>
-          </div>
-          <div class="timeline-step" role="listitem">
-            <h3>3. כריתה והוצאה בטוחה</h3>
-            <p>התוספתן מנותק ומוכנס לשקית סטרילית זעירה שמונעת זיהום פנימי.</p>
-          </div>
-          <div class="timeline-step" role="listitem">
-            <h3>4. סגירה אסתטית</h3>
-            <p>הפתחים הקטנים נסגרים בתפרים נמסים או דבק רפואי – לרוב ללא צורך בהוצאת תפרים.</p>
-          </div>
+  <!-- SYMPTOMS -->
+  <section id="symptoms" class="section light" aria-label="תסמינים">
+    <div class="container">
+      <h2>להקשיב לגוף.</h2>
+      <p>כאב שמתחיל סביב הטבור ועובר בהדרגה לרבע הימני‑תחתון של הבטן, ירידה בתיאבון ובחילה — אלה הסימנים הקלאסיים. לעיתים מצטרף חום נמוך ורגישות במגע.</p>
+      <div class="wave-wrap" aria-hidden="true">
+        <div class="wave">
+          <!-- Inline SVG wave (CSS-animated stroke) -->
+          <svg viewBox="0 0 1200 120" preserveAspectRatio="none" aria-hidden="true">
+            <path d="M0,60 C150,10 300,110 450,60 C600,10 750,110 900,60 C1050,10 1150,90 1200,60" />
+          </svg>
         </div>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <!-- Recovery -->
-    <section id="recovery" class="recovery-section dark-bg" aria-labelledby="recovery-title">
-      <div class="container">
-        <div class="section-tag">ציר זמן להחלמה</div>
-        <h2 id="recovery-title" class="section-title">הדרך הבטוחה לחזרה לשגרה.</h2>
-        <div class="recovery-track">
-          <div class="recovery-box">
-            <div class="recovery-time">ימים 1 – 3</div>
-            <h3>ההתאוששות הראשונית</h3>
-            <p>שחרור לרוב תוך 24 שעות. ייתכן כאב כתפיים מהגז – חולף מעצמו.</p>
-            <div class="tip-badge">💡 המלצת זהב: לזוז בעדינות בבית – עוזר לשחרר גז ולהחזיר פעילות מעיים.</div>
+  <!-- TECHNOLOGY -->
+  <section id="tech" class="section dark" aria-label="טכנולוגיה">
+    <div class="container">
+      <h2>שלושה פתחים. דיוק של מילימטר.</h2>
+      <p class="over-subtle">שיטת 3 פורטים: מצלמת 4K ושני כלים עדינים — פחות טראומה לרקמה, פחות כאב, פחות צלקות, ושחרור לעיתים בתוך 24 שעות.</p>
+      <div class="bento">
+        <div class="tile large">
+          <h3>מצלמת 4K HD</h3>
+          <p>שדה ראייה רחב ומוגדל עם קונטרסט גבוה — לראות הכול, לגעת רק במה שצריך.</p>
+          <div class="camera" aria-hidden="true">
+            <div class="badge-4k">4K</div>
+            <div class="reticle"></div>
+            <div class="cross"></div>
           </div>
-          <div class="recovery-box">
-            <div class="recovery-time">שבוע 1</div>
-            <h3>חזרה הדרגתית</h3>
-            <p>הכאב הפנימי דועך. ניתן להתקלח כרגיל. שמרו על ניקיון האזור.</p>
-            <div class="tip-badge">💡 תזונה קלה ועשירה בסיבים תקל על פעילות מעיים ללא מאמץ בטני.</div>
+        </div>
+        <div class="tile small">
+          <h3>מכשיר דיסקציה מיקרוסקופי</h3>
+          <p>הפרדה עדינה של הרקמות מסביב לאפנדיציט תוך שמירה על מבנים חיוניים.</p>
+        </div>
+        <div class="tile small">
+          <h3>כלי איטום/חיתוך</h3>
+          <p>איטום מדויק ומבוקר להפחתת דימום וחיתוך נקי לצמצום צלקת וסיבוכים.</p>
+        </div>
+      </div>
+      <div class="divider-dark"></div>
+      <p class="over-subtle">התוצאה: יציבה מוקדמת יותר, כאב מופחת, פצעי עור קטנים — ודרך קצרה יותר הביתה.</p>
+    </div>
+  </section>
+
+  <!-- PROCEDURE -->
+  <section id="procedure" class="section dark" aria-label="שלבי ההליך">
+    <div class="container">
+      <h2>45 דקות. מאחורי הקלעים.</h2>
+      <div class="proc">
+        <div class="rail">
+          <div class="track"><div class="fill" id="procFill"></div></div>
+        </div>
+        <div class="steps" id="procSteps">
+          <div class="step">
+            <h4>הרדמה כללית</h4>
+            <p class="note">שינה מלאה לנוחות ובטיחות, ניטור רציף לאורך כל ההליך.</p>
           </div>
-          <div class="recovery-box">
-            <div class="recovery-time">שבועות 2 – 3</div>
-            <h3>האנרגיה חוזרת</h3>
-            <p>אפשר לחזור לנהיגה ולעבודה לא‑פיזית. מבחוץ החתכים מתבהרים.</p>
-            <div class="tip-badge">💡 הימנעו מהרמת משאות כבדים (>5 ק"ג) עד השלמת איחוי שרירי הבטן.</div>
+          <div class="step">
+            <h4>ניפוח חלל הבטן (CO₂)</h4>
+            <p class="note">יוצר מרווח עבודה בטוח. ייתכן כאב כתף/סרעפת זמני לאחר הניתוח עקב גירוי עצבי — חולף בתוך ימים.</p>
           </div>
-          <div class="recovery-box">
-            <div class="recovery-time">חודש 1 והלאה</div>
-            <h3>החלמה מלאה של 100%</h3>
-            <p>הגוף משלים ריפוי פנימי וחיצוני. הצלקות כמעט ואינן נראות.</p>
-            <div class="tip-badge">💡 באישור רפואי: חזרה לחדר כושר, לריצה ולספורט מאמץ.</div>
+          <div class="step">
+            <h4>דיסקציה מדויקת</h4>
+            <p class="note">זיהוי, הפרדה והסרה מבוקרת של האפנדיציט תוך שמירה על כלי דם ורקמות סמוכות.</p>
+          </div>
+          <div class="step">
+            <h4>סגירה בתפרים נמסים</h4>
+            <p class="note">תפרי עור עדינים שנמסים מעצמם — ללא צורך בהסרה, עם צלקת מינימלית.</p>
           </div>
         </div>
       </div>
-    </section>
-  </main>
+    </div>
+  </section>
 
-  <footer aria-label="תחתית הדף">
-    <h2>הגוף יודע להחלים. הטכנולוגיה רק מקצרת את הדרך.</h2>
-    <p>הדף בנוי בעקרונות UX מודרניים להנגשת מידע רפואי בצורה רגועה, נקייה וברורה.</p>
-    <p style="font-size: 12px; color: #515154;">© 2026 כל הזכויות שמורות. נבנה עבור erez1980. המידע להכוונה בלבד ואינו תחליף לייעוץ רפואי.</p>
+  <!-- TRACKER -->
+  <section id="tracker" class="section light" aria-label="מעקב החלמה אישי">
+    <div class="container">
+      <h2>היומן האישי שלך.</h2>
+      <p>אם הזנת תאריך למעלה — נסמן כאן את השלב המדויק שבו אתה נמצא היום.</p>
+      <div class="tracker" id="phaseGrid">
+        <article class="phase" data-phase="early">
+          <h3>ימים 1–3: צעדים ראשונים</h3>
+          <p>הליכות קצרות לשחרור הגז, משככי כאבים לפי צורך, שתייה מרובה. הקשב לגוף.</p>
+          <div class="gold">המלצת זהב: קום לעמידה/הליכה קצרה כל 1–2 שעות בזמן ערות. זה מאיץ התאוששות.</div>
+        </article>
+        <article class="phase" data-phase="week1">
+          <h3>שבוע 1: מקלחת ותזונה קלה</h3>
+          <p>מקלחת מותאמת בהנחיית הצוות; תפריט סיבי וקל לעיכול. הימנע ממאמץ.</p>
+          <div class="gold">המלצת זהב: משלבים סיבים (שיבולת שועל, ירקות) ומים — מפחית נפיחות ועצירות.</div>
+        </article>
+        <article class="phase" data-phase="weeks2_3">
+          <h3>שבועות 2–3: עבודה משרדית — כן. הרמות כבדות — לא.</h3>
+          <p>חזרה הדרגתית לשגרה בישיבה. להימנע מהרמת משקל &gt; 5 ק״ג.</p>
+          <div class="gold">המלצת זהב: הגדל/י מרחקי הליכה מדי יום, ושמור/י על תנוחת עבודה נכונה.</div>
+        </article>
+        <article class="phase" data-phase="month1">
+          <h3>חודש 1: 100% חזרה לפעילות</h3>
+          <p>ספורט, חדר כושר, ורוב הפעילויות חוזרות בהדרגה. הצלקות מיטשטשות.</p>
+          <div class="gold">המלצת זהב: חזרה חכמה — העלה/י עומסים בהדרגה והקשב/י לאיתותי הגוף.</div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faq" class="section light" aria-label="שאלות ותשובות">
+    <div class="container">
+      <h2>כל התשובות.</h2>
+      <div class="faq" role="list">
+        <div class="qa" role="listitem">
+          <div class="q" tabindex="0" aria-expanded="false">
+            <h4>מתי אפשר לנהוג?</h4>
+            <svg class="arrow" width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+          </div>
+          <div class="a"><p>בדרך כלל לאחר 5–7 ימים, כאשר הכאב בשליטה ואת/ה מגיב/ה היטב. יש להימנע מנהיגה תחת השפעת משככי כאבים נרקוטיים.</p></div>
+        </div>
+        <div class="qa" role="listitem">
+          <div class="q" tabindex="0" aria-expanded="false">
+            <h4>חיי מין?</h4>
+            <svg class="arrow" width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+          </div>
+          <div class="a"><p>לרוב ניתן לחזור בעדינות בתוך 1–2 שבועות, בהתאם לנוחות האישית ובהנחיית הצוות המטפל.</p></div>
+        </div>
+        <div class="qa" role="listitem">
+          <div class="q" tabindex="0" aria-expanded="false">
+            <h4>שינויים לטווח ארוך?</h4>
+            <svg class="arrow" width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+          </div>
+          <div class="a"><p>אין. הגוף מתפקד מצוין ללא אפנדיציט. אין צורך בתוספים או דיאטה מיוחדת לאחר ההחלמה.</p></div>
+        </div>
+        <div class="qa" role="listitem">
+          <div class="q" tabindex="0" aria-expanded="false">
+            <h4>מתי לפנות לרופא?</h4>
+            <svg class="arrow" width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+          </div>
+          <div class="a"><p>סימני אזהרה מפורטים במדד ה‑SOS למטה. בקיצור: חום גבוה, כאב מחמיר, אודם/הפרשה מפצעים, הקאות חוזרות, קוצר נשימה — פנו להערכה רפואית.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SOS -->
+  <section id="sos" class="section light" aria-label="מדד אזהרה SOS">
+    <div class="container">
+      <h2>מדד אזהרה (SOS)</h2>
+      <div class="sos-card">
+        <p><strong>מתי לפנות מיד לרופא/חדר מיון:</strong></p>
+        <div class="sos-list" role="list">
+          <div class="sos-item" role="listitem"><div class="sos-dot"></div><div>חום מעל 38°C שנמשך &gt; 24 שעות או מצטרף לו צמרמורת.</div></div>
+          <div class="sos-item" role="listitem"><div class="sos-dot"></div><div>כאב בטן שמתגבר מיום ליום או אינו נרגע עם משככים שנרשמו.</div></div>
+          <div class="sos-item" role="listitem"><div class="sos-dot"></div><div>אודם, חום, ריח רע או הפרשה מהחתכים.</div></div>
+          <div class="sos-item" role="listitem"><div class="sos-dot"></div><div>הקאות חוזרות/התייבשות, אי‑יכולת לשתות או לאכול.</div></div>
+          <div class="sos-item" role="listitem"><div class="sos-dot"></div><div>קוצר נשימה, כאב בחזה, נפיחות/כאב פתאומי ברגל.</div></div>
+        </div>
+        <div class="sos-meter" aria-hidden="true" title="מדד עוצמת דחיפות חזותי"></div>
+        <div class="sos-cta">
+          <button class="btn" type="button" onclick="alert('במצב חירום — פנו מיידית לעזרה רפואית זמינה באזורכם.')">עזרה מיידית</button>
+          <button class="btn" type="button" style="background:#FF6B61" onclick="document.querySelector('#hero').scrollIntoView({behavior:'smooth'})">חזרה לתחילת העמוד</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer aria-label="כותרת תחתונה">
+    <div class="container">
+      <p>הגוף יודע להחלים. הטכנולוגיה רק מקצרת את הדרך.</p>
+      <small>© <span id="year"></span> erez1980</small>
+    </div>
   </footer>
+
+  <script>
+    // UTIL: clamp
+    const clamp = (v, min, max) => Math.min(Math.max(v, min), max);
+
+    // FOOTER YEAR
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // PROCEDURE: scroll-driven fill
+    (function(){
+      const section = document.getElementById('procedure');
+      const fill = document.getElementById('procFill');
+      const steps = Array.from(document.querySelectorAll('#procSteps .step'));
+
+      const update = () => {
+        const rect = section.getBoundingClientRect();
+        const vh = window.innerHeight || 1;
+        const progress = 1 - clamp((rect.bottom - 0.15*vh) / (rect.height + 0.7*vh), 0, 1);
+        fill.style.height = (progress*100).toFixed(1) + '%';
+
+        // Activate step cards as they enter viewport
+        steps.forEach((el,i)=>{
+          const r = el.getBoundingClientRect();
+          const mid = r.top + r.height/2;
+          const active = mid < vh*0.75;
+          el.classList.toggle('active', active);
+        });
+      };
+      update();
+      window.addEventListener('scroll', update, {passive:true});
+      window.addEventListener('resize', update);
+    })();
+
+    // ACCORDION
+    (function(){
+      const qas = Array.from(document.querySelectorAll('.qa'));
+      qas.forEach(qa=>{
+        const q = qa.querySelector('.q');
+        q.addEventListener('click', ()=>{
+          const open = qa.classList.contains('open');
+          qas.forEach(x=>{
+            x.classList.remove('open');
+            x.querySelector('.q').setAttribute('aria-expanded','false');
+          });
+          if(!open){
+            qa.classList.add('open');
+            q.setAttribute('aria-expanded','true');
+          }
+        });
+        q.addEventListener('keydown', (e)=>{
+          if(e.key === 'Enter' || e.key === ' '){
+            e.preventDefault(); q.click();
+          }
+        });
+      });
+    })();
+
+    // TRACKER: personalized phases
+    (function(){
+      const surgeryInput = document.getElementById('surgeryDate');
+      const saveBtn = document.getElementById('saveDateBtn');
+      const dateSaved = document.getElementById('dateSaved');
+      const todayChip = document.getElementById('todayPhaseChip');
+      const todayText = document.getElementById('todayPhaseText');
+      const phasesEls = Array.from(document.querySelectorAll('.phase'));
+
+      const PHASES = [
+        { id:'early',   name:'ימים 1–3',       start:0, end:3 },
+        { id:'week1',   name:'שבוע 1',        start:3, end:7 },
+        { id:'weeks2_3',name:'שבועות 2–3',    start:7, end:21 },
+        { id:'month1',  name:'חודש 1',        start:21, end:31 }
+      ];
+
+      function daysSince(dateStr){
+        if(!dateStr) return null;
+        const d0 = new Date(dateStr + 'T00:00:00');
+        if (isNaN(d0)) return null;
+        const now = new Date();
+        // לחשב לפי חצות מקומי
+        const d1 = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+        const diff = (d1 - d0) / (1000*60*60*24);
+        return Math.floor(diff);
+      }
+
+      function phaseFor(days){
+        if(days == null || isNaN(days)) return null;
+        for(const ph of PHASES){
+          if(days >= ph.start && days < ph.end) return ph;
+        }
+        // אחרי 30 יום — נחשב כחודש 1 (סיום)
+        return PHASES[PHASES.length-1];
+      }
+
+      function highlightPhase(id){
+        phasesEls.forEach(el => el.classList.toggle('active', el.dataset.phase === id));
+      }
+
+      function render(){
+        const stored = localStorage.getItem('surgeryDate');
+        if(stored) surgeryInput.value = stored;
+        const d = daysSince(stored);
+        const ph = phaseFor(d);
+        phasesEls.forEach(el => el.classList.remove('active'));
+        if(ph){
+          highlightPhase(ph.id);
+          todayText.textContent = `היום יום ${d} לאחר הניתוח — שלב: ${ph.name}.`;
+          todayChip.style.display = 'inline-flex';
+        }else{
+          todayChip.style.display = 'none';
+        }
+      }
+
+      // init
+      render();
+
+      saveBtn.addEventListener('click', ()=>{
+        const val = surgeryInput.value;
+        if(val){
+          localStorage.setItem('surgeryDate', val);
+          dateSaved.style.display = 'inline';
+          render();
+          setTimeout(()=> dateSaved.style.display='none', 1600);
+        }
+      });
+
+      surgeryInput.addEventListener('change', ()=>{
+        dateSaved.style.display = 'none';
+      });
+    })();
+
+    // SOS nav quick-key (optional UX nicety)
+    document.addEventListener('keydown', (e)=>{
+      if((e.key === 's' || e.key === 'S') && (e.ctrlKey || e.metaKey)){
+        e.preventDefault();
+        document.querySelector('#sos').scrollIntoView({behavior:'smooth'});
+      }
+    });
+  </script>
 </body>
 </html>
